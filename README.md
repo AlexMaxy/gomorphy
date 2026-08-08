@@ -68,7 +68,7 @@ func main() {
 	// или
 	inf, _ := parse.InflectVar("gent", "plur")
 	if inf == nil {
-		fmt.Println("склонение не возможно")
+		fmt.Println("склонение отсутствует")
 		return
 	}
 
