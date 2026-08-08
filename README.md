@@ -76,9 +76,16 @@ func main() {
 	fmt.Println("склонение слова род.п., мн.ч.:", inf.Word)
 	fmt.Println("inflected normal form:", inf.NormalForm)
 	fmt.Println("inflected raw tags string:", inf.Tag.RawTagsString)
+	fmt.Println()
 
 	// другие методы
 
+	// parse.Lexeme() // возвращает лексемы, принадлежащие этой форме
+	// parse.Normalized() // возвращает объект Parse нормальной формы слова.
+
+	fmt.Println("пять", parse.MakeAgreeWithNumber(5).Word) // пять кошек
+
+	fmt.Println("словарное слово:", parse.IsKnown())
 	fmt.Println("словарное слово:", morph.WordIsKnown(word, true))
 
 	if cyr, err := morph.Lat2Cyr("gent"); err == nil {
@@ -87,7 +94,7 @@ func main() {
 
 	fmt.Printf("нормализованные формы слова: %#v\n", morph.NormalForms(word))
 
-	fmt.Printf("%#v\n", *morph.Tag(word)[0])
+	// fmt.Printf("%#v\n", *morph.Tag(word)[0])
 }
 
 // word: кошка
@@ -103,15 +110,17 @@ func main() {
 // prob score: 0.9375
 // methods stack:
 // имя анализатора: DictionaryAnalyzer
-// gomorphy.Method{Analyzer:(*gomorphy.dictionaryAnalyzer)(0x28f60994080), WordOrStack:"кошка", ParaIdOrStack:134, Idx:0}
+// gomorphy.Method{Analyzer:(*gomorphy.dictionaryAnalyzer)(0x345f7f092080), WordOrStack:"кошка", ParaIdOrStack:134, Idx:0}
 
 // склонение слова род.п., мн.ч.: кошек
 // inflected normal form: кошка
 // inflected raw tags string: NOUN,anim,femn plur,gent
+
+// пять кошек
+// словарное слово: true
 // словарное слово: true
 // кириллический тег `gent`: рд
 // нормализованные формы слова: []string{"кошка"}
-// gomorphy.opencorporaTag{prob:0.9375, tags:map[string]bool{"NOUN":true, "anim":true, "femn":true, "nomn":true, "sing":true}, grammemesCache:map[string]bool(nil), grammemesTuple:[]string{"NOUN", "anim", "femn", "sing", "nomn"}, POS:"NOUN", Case:"nomn", Number:"sing", Gender:"femn", Animate:"anim", RawTagsString:"NOUN,anim,femn sing,nomn", tagClass:(*gomorphy.tagClass)(0x28f601b0240)}
 ```
 
 
