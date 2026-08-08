@@ -60,7 +60,8 @@ func main() {
 
 	fmt.Println("methods stack:")
 	for _, m := range parse.MethodsStack {
-		fmt.Printf("%#v\n", m)
+		fmt.Println("имя анализатора:", m.Analyzer.Name())
+		fmt.Printf("%#v\n\n", m)
 	}
 	fmt.Println()
 
@@ -101,6 +102,7 @@ func main() {
 // tags contains `gent` false
 // prob score: 0.9375
 // methods stack:
+// имя анализатора: DictionaryAnalyzer
 // gomorphy.Method{Analyzer:(*gomorphy.dictionaryAnalyzer)(0x28f60994080), WordOrStack:"кошка", ParaIdOrStack:134, Idx:0}
 
 // склонение слова род.п., мн.ч.: кошек
