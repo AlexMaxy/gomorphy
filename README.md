@@ -37,6 +37,9 @@ func main() {
 	word := "кошка"
 
 	parses := morph.Parse(word)
+
+	// if parses[0].Tag.Contains("UNKN")
+	// или
 	if !morph.IsParsed(parses) {
 		fmt.Println("unknown word")
 		return
