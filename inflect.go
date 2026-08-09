@@ -15,6 +15,9 @@ func (p *Parse) Inflect(requiredGrammemes []string) (*Parse, error) {
 	}
 	reqGrammemesSet := make(map[string]bool, len(requiredGrammemes))
 	for _, grammeme := range requiredGrammemes {
+		if !p.Tag.grammemeIsKnown(grammeme) {
+			return nil, fmt.Errorf("Unknown grammeme: %#v", grammeme)
+		}
 		reqGrammemesSet[grammeme] = true
 	}
 	return morphAnalyzer.inflect(p, reqGrammemesSet)
