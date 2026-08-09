@@ -53,8 +53,8 @@ func main() {
 	fmt.Println("tag.Number:", parse.Tag.Number)
 	fmt.Println("tag.Animate:", parse.Tag.Animate)
 
-	fmt.Println("tags contains `NOUN`", parse.Tag.Contains("NOUN")) // true
-	fmt.Println("tags contains `gent`", parse.Tag.Contains("gent")) // false
+	fmt.Println("tags contains `NOUN`:", parse.Tag.Contains("NOUN")) // true
+	fmt.Println("tags contains `gent`:", parse.Tag.Contains("gent")) // false
 
 	fmt.Println("prob score:", parse.Score)
 
@@ -65,18 +65,19 @@ func main() {
 	}
 	fmt.Println()
 
-	// inf, _ := parse.Inflect([]string{"gent", "plur"})
+	// inf, err := parse.Inflect([]string{"gent", "plur"})
 	// или
-	inf, _ := parse.InflectVar("gent", "plur")
-	if inf == nil {
+	inf, err := parse.InflectVar("gent", "plur")
+	if err != nil {
+		fmt.Println("некорректный тег:", err)
+	} else if inf == nil {
 		fmt.Println("склонение отсутствует")
-		return
+	} else {
+		fmt.Println("склонение слова род.п., мн.ч.:", inf.Word)
+		fmt.Println("inflected normal form:", inf.NormalForm)
+		fmt.Println("inflected raw tags string:", inf.Tag.RawTagsString)
+		fmt.Println()
 	}
-
-	fmt.Println("склонение слова род.п., мн.ч.:", inf.Word)
-	fmt.Println("inflected normal form:", inf.NormalForm)
-	fmt.Println("inflected raw tags string:", inf.Tag.RawTagsString)
-	fmt.Println()
 
 	// другие методы
 
@@ -88,7 +89,9 @@ func main() {
 	fmt.Println("словарное слово:", parse.IsKnown())
 	fmt.Println("словарное слово:", morph.WordIsKnown(word, true))
 
-	if cyr, err := morph.Lat2Cyr("gent"); err == nil {
+	if cyr, err := morph.Lat2Cyr("gent"); err != nil {
+		fmt.Println("некорректный тег:", err)
+	} else {
 		fmt.Println("кириллический тег `gent`:", cyr)
 	}
 
@@ -96,33 +99,35 @@ func main() {
 
 	// fmt.Printf("%#v\n", *morph.Tag(word)[0])
 }
-
-// word: кошка
-// normal form: кошка
-// raw tags string: NOUN,anim,femn sing,nomn
-// tag.POS: NOUN
-// tag.Case: nomn
-// tag.Gender: femn
-// tag.Number: sing
-// tag.Animate: anim
-// tags contains `NOUN` true
-// tags contains `gent` false
-// prob score: 0.9375
-// methods stack:
-// имя анализатора: DictionaryAnalyzer
-// gomorphy.Method{Analyzer:(*gomorphy.dictionaryAnalyzer)(0x345f7f092080), WordOrStack:"кошка", ParaIdOrStack:134, Idx:0}
-
-// склонение слова род.п., мн.ч.: кошек
-// inflected normal form: кошка
-// inflected raw tags string: NOUN,anim,femn plur,gent
-
-// пять кошек
-// словарное слово: true
-// словарное слово: true
-// кириллический тег `gent`: рд
-// нормализованные формы слова: []string{"кошка"}
 ```
+### Результат:
+```
+word: кошка
+normal form: кошка
+raw tags string: NOUN,anim,femn sing,nomn
+tag.POS: NOUN
+tag.Case: nomn
+tag.Gender: femn
+tag.Number: sing
+tag.Animate: anim
+tags contains `NOUN` true
+tags contains `gent` false
+prob score: 0.9375
+methods stack:
+имя анализатора: DictionaryAnalyzer
+gomorphy.Method{Analyzer:(*gomorphy.dictionaryAnalyzer)(0x154945dbc6c0), WordOrStack:"кошка", ParaIdOrStack:134, Idx:0}
 
+
+склонение слова род.п., мн.ч.: кошек
+inflected normal form: кошка
+inflected raw tags string: NOUN,anim,femn plur,gent
+
+пять кошек
+словарное слово: true
+словарное слово: true
+кириллический тег `gent`: рд
+нормализованные формы слова: []string{"кошка"}
+```
 
 ## License
 
