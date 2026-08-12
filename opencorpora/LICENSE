@@ -2,7 +2,7 @@ The dictionary data in this directory is derived from the OpenCorpora project
 (http://opencorpora.org/) and is licensed under the Creative Commons
 Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
 
-Original data: OpenCorpora v0.92 (revision 417127), © OpenCorpora contributors.
+Original data: OpenCorpora v0.92 (revision 417266), © OpenCorpora contributors.
 Compiled using pymorphy2 v0.9.1 (https://github.com/pymorphy2-fork/pymorphy2).
 
 You are free to:
